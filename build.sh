@@ -14,7 +14,7 @@ main() {
 apt-get update
 apt-get install -qq gcc libglib2.0-dev libpixman-1-dev make pkg-config python zlib1g-dev
 useradd -m -u $uid alice
-su alice -c './configure --disable-kvm --disable-vnc --enable-user --target-list=$arch-linux-user --static'
+su alice -c './configure --disable-kvm --disable-vnc --enable-user --target-list=$arch-linux-user,$arch-softmmu'
 su alice -c 'make -j$(nproc)'
 "
 
@@ -23,6 +23,7 @@ su alice -c 'make -j$(nproc)'
     mkdir -p $uvers
 
     cp qemu-$qvers/arm-linux-user/qemu-arm $uvers/qemu-arm-$qvers
+    cp qemu-$qvers/arm-softmmu/qemu-system-arm $uvers/qemu-system-arm-$qvers
 
     rm -rf qemu-$qvers
 }
